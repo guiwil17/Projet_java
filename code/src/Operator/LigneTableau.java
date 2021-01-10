@@ -1,4 +1,6 @@
 package Operator;
+import java.util.Date;
+
 
 public class LigneTableau 
 	{
@@ -18,6 +20,24 @@ public class LigneTableau
 	private boolean c_limit;
 	private java.util.Date date;
 
+	LigneTableau(){
+		this.box_conveyor = false;
+		this.part_conveyor = false;
+		this.grab = false;
+		this.c_plus = false;
+		this.auto = false;
+		this.manual = false;
+		this.emergency_stop = false;
+		this.reset_button = false;
+		this.start = false;
+		this.stop = false;
+		this.part_at_place = false;
+		this.box_at_place = false;
+		this.detected = false;
+		this.c_limit = false;
+		this.date = new Date();
+	}
+  
 	// Constructeur de l'objet LigneTableau, à partir des paramètres CSV sans les réels et entiers
 	LigneTableau(boolean box_conveyor, boolean part_conveyor, boolean grab, boolean c_plus, boolean auto, boolean manual, boolean emergency_stop, boolean reset_button, boolean start, boolean stop, boolean part_at_place, boolean box_at_place, boolean detected, boolean c_limit, java.util.Date date)
 		{
@@ -48,7 +68,7 @@ public class LigneTableau
 		return b;
 		}
 	
-	// Setteurs des paramètres de chaque ligne du CSV	
+
 	public void set_box_conveyor(boolean b)
 		{
 		box_conveyor = b;
@@ -124,7 +144,7 @@ public class LigneTableau
 		date = d;
 		}
 	
-// Getteurs des paramètres de chaque ligne du CSV
+
 	
 	public boolean get_box_conveyor()
 		{
