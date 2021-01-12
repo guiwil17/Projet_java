@@ -13,6 +13,9 @@ import java.util.Date;
 import java.util.Vector;
 
 public class CSVManager {
+	
+	Vector<LigneTableau> vector = new Vector<LigneTableau>();
+	
 	public static void main(String[] args) {
 		Vector<LigneTableau> res = elimine_number();
 		LigneTableau t = res.get(0);
