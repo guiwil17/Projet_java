@@ -36,7 +36,8 @@ public class LigneTableau
 		this.c_limit = false;
 		this.date = new Date();
 	}
-	// Constructeur de l'objet LigneTableau, ? partir des param?tres CSV sans les r?els et entiers
+  
+	// Constructeur de l'objet LigneTableau, à partir des paramètres CSV sans les réels et entiers
 	LigneTableau(boolean box_conveyor, boolean part_conveyor, boolean grab, boolean c_plus, boolean auto, boolean manual, boolean emergency_stop, boolean reset_button, boolean start, boolean stop, boolean part_at_place, boolean box_at_place, boolean detected, boolean c_limit, java.util.Date date)
 		{
 		this.box_conveyor = box_conveyor;
@@ -73,6 +74,7 @@ public class LigneTableau
 		}
 	
 	// Setteurs des param?tres de chaque ligne du CSV	
+
 	public void set_box_conveyor(boolean b)
 		{
 		box_conveyor = b;
@@ -149,6 +151,7 @@ public class LigneTableau
 		}
 	
 // Getteurs des param?tres de chaque ligne du CSV
+
 	
 	public boolean get_box_conveyor()
 		{
