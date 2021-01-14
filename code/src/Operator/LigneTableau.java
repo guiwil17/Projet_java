@@ -19,6 +19,7 @@ public class LigneTableau
 	private boolean c_limit;
 	private java.util.Date date;
 
+	// Constructeur par défaut de l'objet LigneTableau, avec tous les paramètres à false et la date actuelle
 	LigneTableau(){
 		this.box_conveyor = false;
 		this.part_conveyor = false;
@@ -62,7 +63,8 @@ public class LigneTableau
 		String s = box_conveyor+" - "+part_conveyor+" - "+grab+" - "+c_plus+" - "+auto+" - "+manual+" - "+emergency_stop+" - "+reset_button+" - "+start+" - "+stop+" - "+part_at_place+" - "+box_at_place+" - "+detected+" - "+c_limit+" - "+date+"\n";
 		return s;
 		}
-	
+
+	// Vérifie si l'objet est égal au 2e objet LigneTableau (mêmes conditions mais pas la même date) 
 	public boolean is_equal_to(LigneTableau l2)
 		{
 		boolean b = false;

@@ -215,9 +215,5 @@ public class CSVManager {
 				}
 			}
 		vector=vector2;
-		for(int indice=0; indice<vector.size(); indice+=1)
-			{
-			System.out.print(vector.get(indice).to_string());
-			}
 		}
 }
