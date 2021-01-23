@@ -44,7 +44,7 @@ public class CSVManager {
 		
 		// DÃ©claration des variables
 		
-		String csvFile = "C:/Users/guigu/Desktop/CNAM/Java/Projet_java/input_file.csv";
+		String csvFile = "C:\\Users\\utilisateur\\Desktop\\Projet JAVA\\Projet_java/input_file.csv";
 		char cvsSplitBy = ';';
         BufferedReader r = null;        
         String annee = "";
@@ -218,9 +218,106 @@ public class CSVManager {
 				}
 			}
 		vector=vector2;
-		for(int indice=0; indice<vector.size(); indice+=1)
+		}
+	public static Vector<StringBuffer> ListEvent(Vector<LigneTableau> vector)
+	{
+		Vector<StringBuffer> str = new Vector<StringBuffer>();
+		Vector<Boolean> ligneComp = new Vector<Boolean>();
+		Vector<Boolean> preLigneComp = new Vector<Boolean>();
+		Vector<String> compName = new Vector<String>();
+		int TimeConstraint = 0;
+		for(int i = 1; i < vector.size(); i++)
+		{
+			
+			LigneTableau ligne = vector.elementAt(i); //obj[i];
+			LigneTableau preLigne = vector.elementAt(i-1); //obj[i-1];
+			if(ligne.is_equal_to(preLigne)) //ligne.Comp1 == preLigne.Comp1 && ligne.Comp2 == preLigne.Comp2
 			{
-			System.out.print(vector.get(indice).to_string());
+				//TimeConstraint = ligne.get_date() - preLigne.get_date();
+				TimeConstraint = ligne.get_date().compareTo(preLigne.get_date());
+			}
+			else
+			{
+				//Comp1 box_conveyor
+				ligneComp.add(ligne.get_box_conveyor());
+				preLigneComp.add(preLigne.get_box_conveyor());
+				compName.add("box_conveyor");
+				//Comp2 part_conveyor
+				ligneComp.add(ligne.get_part_conveyor());
+				preLigneComp.add(preLigne.get_part_conveyor());
+				compName.add("part_conveyor");
+				//Comp3 grab
+				ligneComp.add(ligne.get_grab());
+				preLigneComp.add(preLigne.get_grab());
+				compName.add("grab");
+				//Comp4 c_plus
+				ligneComp.add(ligne.get_c_plus());
+				preLigneComp.add(preLigne.get_c_plus());
+				compName.add("c_plus");
+				//Comp5 auto
+				ligneComp.add(ligne.get_auto());
+				preLigneComp.add(preLigne.get_auto());
+				compName.add("auto");
+				//Comp6 manual
+				ligneComp.add(ligne.get_manual());
+				preLigneComp.add(preLigne.get_manual());
+				compName.add("manual");
+				//Comp7 emergency_stop
+				ligneComp.add(ligne.get_emergency_stop());
+				preLigneComp.add(preLigne.get_emergency_stop());
+				compName.add("emergency_stop");
+				//Comp8 reset_button
+				ligneComp.add(ligne.get_reset_button());
+				preLigneComp.add(preLigne.get_reset_button());
+				compName.add("reset_button");
+				//Comp9 start
+				ligneComp.add(ligne.get_start());
+				preLigneComp.add(preLigne.get_start());
+				compName.add("start");
+				//Comp10 stop
+				ligneComp.add(ligne.get_stop());
+				preLigneComp.add(preLigne.get_stop());
+				compName.add("stop");
+				//Comp11 part_at_place
+				ligneComp.add(ligne.get_part_at_place());
+				preLigneComp.add(preLigne.get_part_at_place());
+				compName.add("part_at_place");
+				//Comp12 box_at_place
+				ligneComp.add(ligne.get_box_at_place());
+				preLigneComp.add(preLigne.get_box_at_place());
+				compName.add("box_at_place");
+				//Comp13 detected
+				ligneComp.add(ligne.get_detected());
+				preLigneComp.add(preLigne.get_detected());
+				compName.add("detected");
+				//Comp14 c_limit
+				ligneComp.add(ligne.get_c_limit());
+				preLigneComp.add(preLigne.get_c_limit());
+				compName.add("c_limit");
+				
+				for(int j = 0; j < ligneComp.size(); j++)
+				{
+					if(ligneComp.elementAt(j) != preLigneComp.elementAt(j))
+					{
+						StringBuffer event = new StringBuffer();
+						if(preLigneComp.elementAt(j) == true)
+						{
+							event.append("FE_");
+						}
+						else
+						{
+							event.append("RE_");
+						}
+						event.append(compName.elementAt(j));
+						event.append(";");
+						event.append(TimeConstraint);
+						event.append("µs;");
+						str.add(event);
+					}
+				}
+				
 			}
 		}
+		return str;
+	}
 }
