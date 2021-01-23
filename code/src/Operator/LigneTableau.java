@@ -17,7 +17,7 @@ public class LigneTableau
 	private boolean box_at_place;
 	private boolean detected;
 	private boolean c_limit;
-	private java.util.Date date;
+	private long date;
 
 	LigneTableau(){
 		this.box_conveyor = false;
@@ -34,11 +34,11 @@ public class LigneTableau
 		this.box_at_place = false;
 		this.detected = false;
 		this.c_limit = false;
-		this.date = new Date();
+		this.date =0;
 	}
   
 	// Constructeur de l'objet LigneTableau, à partir des paramètres CSV sans les réels et entiers
-	LigneTableau(boolean box_conveyor, boolean part_conveyor, boolean grab, boolean c_plus, boolean auto, boolean manual, boolean emergency_stop, boolean reset_button, boolean start, boolean stop, boolean part_at_place, boolean box_at_place, boolean detected, boolean c_limit, java.util.Date date)
+	LigneTableau(boolean box_conveyor, boolean part_conveyor, boolean grab, boolean c_plus, boolean auto, boolean manual, boolean emergency_stop, boolean reset_button, boolean start, boolean stop, boolean part_at_place, boolean box_at_place, boolean detected, boolean c_limit, long date)
 		{
 		this.box_conveyor = box_conveyor;
 		this.part_conveyor = part_conveyor;
@@ -145,7 +145,7 @@ public class LigneTableau
 		c_limit = b;
 		}
 	
-	public void set_date(java.util.Date d)
+	public void set_date(long d)
 		{
 		date = d;
 		}
@@ -223,7 +223,7 @@ public class LigneTableau
 		return c_limit;
 		}
 	
-	public java.util.Date get_date()
+	public long get_date()
 		{
 		return date;
 		}

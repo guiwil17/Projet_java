@@ -10,16 +10,19 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Vector;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 
 public class CSVManager {
 	
 	Vector<LigneTableau> vector = new Vector<LigneTableau>();
 	
 	public static void main(String[] args) {
-		Vector<LigneTableau> res = elimine_number();
-		LigneTableau t = res.get(0);
-		System.out.println(t.get_box_conveyor());
+	
 	}
 	
 	public static String[][] readCSV(String nomFichier, char c, Charset charset) throws IOException {
@@ -37,7 +40,7 @@ public class CSVManager {
 		  return false;
 	}
 
-	public static Vector<LigneTableau> elimine_number() { 
+	public Vector<LigneTableau> elimine_number() { 
 		
 		// Déclaration des variables
 		
@@ -48,10 +51,10 @@ public class CSVManager {
         String day = "";
         String month = "";
         String min = "";
-        String hours = "";
+        String h = "";
         String s = "";
-        String ms = "";
-        Vector<LigneTableau> vector = new Vector<LigneTableau>();
+        String ms = "0";       
+        long last_time = 0;
         int debut_s = 43;
         LigneTableau L = new LigneTableau();
 
@@ -114,25 +117,16 @@ public class CSVManager {
 								annee = String.valueOf(ligne[colonne].charAt(19))+ String.valueOf(ligne[colonne].charAt(20)) + String.valueOf(ligne[colonne].charAt(21)) + String.valueOf(ligne[colonne].charAt(22));	
 								month = "0" + String.valueOf(ligne[colonne].charAt(25)) ;
 								day = String.valueOf(ligne[colonne].charAt(28)) + String.valueOf(ligne[colonne].charAt((29)));
-								hours = String.valueOf(ligne[colonne].charAt(32)) + String.valueOf(ligne[colonne].charAt((33)));
-								min = String.valueOf(ligne[colonne].charAt(36));								
+								h = String.valueOf(ligne[colonne].charAt(32)) + String.valueOf(ligne[colonne].charAt((33)));
+								min = String.valueOf(ligne[colonne].charAt(36)) + String.valueOf(ligne[colonne].charAt(37));								
 								//Permet de remettre à 0 la String
 								ms = "";
 								
-								s = String.valueOf(ligne[colonne].charAt(39)) + String.valueOf(ligne[colonne].charAt(40));
+								s = String.valueOf(ligne[colonne].charAt(39)) + String.valueOf(ligne[colonne].charAt(40)) + String.valueOf(ligne[colonne].charAt(41));
 								s = s.replaceAll(" ", "");
 								s = s.replaceAll(",", "");
+								min = min.replaceAll(",", "");
 								
-								// Afin d'avoir une date correcte on rajoute un 0 devant si la valeure est inférieure à 10
-								if(Integer.parseInt(s) < 10) 
-								{
-									s = "0" + s;
-								}
-								
-								if(Integer.parseInt(min) < 10) 
-								{
-									min = "0" + min;
-								}
 								
 								//On créé une nouvelle chaine de caratère afin de récupérer les millisecondes car la String ne fait pas tout le temps la même taille
 								String ne = ligne[colonne].substring(19,ligne[colonne].indexOf(')'));
@@ -156,23 +150,31 @@ public class CSVManager {
 																
 								min = min.replaceAll(",", "");
 								
-								String MyDate = annee + "/" + month + "/" + day + " " + hours + ":" + min + ":" + s;
+								String MyDate = annee + "/" + month + "/" + day + " " + h + ":" + min + ":" + s;
 								ms = ms.replaceAll(" ", "");
 								
 								
-								//On convertit notre date afin de l'obtenir en milliseconde pour pouvoir ajouter les millisecondes récupéré précedemment
-								try {
-									SimpleDateFormat da = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-									Date d = da.parse(MyDate);
-									long time = d.getTime() + Long.parseLong(ms);
-									Date dd = new Date(time);
+								//On convertit notre date afin de l'obtenir en milliseconde pour pouvoir ajouter les millisecondes r�cup�r� precedemment
+							
+									long seconds = Long.parseLong(s) * 1000000;
+									long minutes = Long.parseLong(min) * (60 * 1000000);
+									long hours = Long.parseLong(h)* 60 *60 * 1000000;
+									long days = Long.parseLong(day) * (24 * 60 * 60 * 1000000);
+																
+									long time = Long.parseLong(ms) + seconds + minutes + hours + days;									
 									
+									// On v�rifie que le temps pr�c�dent est inf�rieur au temps actuel 
+									if (last_time != 0 && last_time > time) {
+										time += last_time - time + 00000000001;
+									}
+									last_time = time;
+
+									System.out.println(time);	
+
 									//On ajoute la date à notre Ligne
-									L.set_date(dd);								
-								}
-								catch(ParseException e) {
-									System.out.println(e);
-								}							        
+									L.set_date(time);	
+								
+														        
 							}												
 					}										
 				}
@@ -186,6 +188,7 @@ public class CSVManager {
         catch(IOException e) {
         	e.printStackTrace();
         }
+        
         return vector;
 
 	}
