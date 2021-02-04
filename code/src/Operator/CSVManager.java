@@ -169,7 +169,7 @@ public class CSVManager {
 									}
 									last_time = time;
 
-									System.out.println(time);	
+									//System.out.println(time);	
 
 									//On ajoute la date à notre Ligne
 									L.set_date(time);	
@@ -219,13 +219,15 @@ public class CSVManager {
 			}
 		vector=vector2;
 		}
+	
 	public static Vector<StringBuffer> ListEvent(Vector<LigneTableau> vector)
 	{
 		Vector<StringBuffer> str = new Vector<StringBuffer>();
 		Vector<Boolean> ligneComp = new Vector<Boolean>();
 		Vector<Boolean> preLigneComp = new Vector<Boolean>();
 		Vector<String> compName = new Vector<String>();
-		int TimeConstraint = 0;
+		long TimeConstraint = 0;
+		//System.out.println(vector.size());
 		for(int i = 1; i < vector.size(); i++)
 		{
 			
@@ -233,11 +235,14 @@ public class CSVManager {
 			LigneTableau preLigne = vector.elementAt(i-1); //obj[i-1];
 			if(ligne.is_equal_to(preLigne)) //ligne.Comp1 == preLigne.Comp1 && ligne.Comp2 == preLigne.Comp2
 			{
-				//TimeConstraint = ligne.get_date() - preLigne.get_date();
-				TimeConstraint = ligne.get_date().compareTo(preLigne.get_date());
+				TimeConstraint = (long)ligne.get_date() - (long)preLigne.get_date();
+				//TimeConstraint = ligne.get_date().compareTo(preLigne.get_date());
 			}
 			else
 			{
+				ligneComp.clear();
+				preLigneComp.clear();
+				compName.clear();
 				//Comp1 box_conveyor
 				ligneComp.add(ligne.get_box_conveyor());
 				preLigneComp.add(preLigne.get_box_conveyor());
@@ -294,7 +299,7 @@ public class CSVManager {
 				ligneComp.add(ligne.get_c_limit());
 				preLigneComp.add(preLigne.get_c_limit());
 				compName.add("c_limit");
-				
+				//System.out.println(ligneComp.size());
 				for(int j = 0; j < ligneComp.size(); j++)
 				{
 					if(ligneComp.elementAt(j) != preLigneComp.elementAt(j))
