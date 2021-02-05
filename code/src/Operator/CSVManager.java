@@ -44,7 +44,7 @@ public class CSVManager {
 		
 		// DÃ©claration des variables
 		
-		String csvFile = "C:\\Users\\utilisateur\\Desktop\\Projet JAVA\\Projet_java/input_file.csv";
+		String csvFile = "C:\\Users\\quent\\Documents\\Cours\\FIP\\Dev\\Java\\projet\\Projet_java\\Projet_java\\input_file.csv";
 		char cvsSplitBy = ';';
         BufferedReader r = null;        
         String annee = "";
@@ -220,9 +220,9 @@ public class CSVManager {
 		vector=vector2;
 		}
 	
-	public static Vector<StringBuffer> ListEvent(Vector<LigneTableau> vector)
+	public static Vector<String> ListEvent(Vector<LigneTableau> vector)
 	{
-		Vector<StringBuffer> str = new Vector<StringBuffer>();
+		Vector<String> str = new Vector<String>();
 		Vector<Boolean> ligneComp = new Vector<Boolean>();
 		Vector<Boolean> preLigneComp = new Vector<Boolean>();
 		Vector<String> compName = new Vector<String>();
@@ -304,19 +304,19 @@ public class CSVManager {
 				{
 					if(ligneComp.elementAt(j) != preLigneComp.elementAt(j))
 					{
-						StringBuffer event = new StringBuffer();
+						String event = new String();
 						if(preLigneComp.elementAt(j) == true)
 						{
-							event.append("FE_");
+							event+="FE_";
 						}
 						else
 						{
-							event.append("RE_");
+							event+="RE_";
 						}
-						event.append(compName.elementAt(j));
-						event.append(";");
-						event.append(TimeConstraint);
-						event.append("µs;");
+						event+=compName.elementAt(j);
+						event+=";";
+						event+=TimeConstraint;
+						event+="µs;";
 						str.add(event);
 					}
 				}

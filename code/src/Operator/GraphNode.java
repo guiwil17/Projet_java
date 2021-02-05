@@ -2,17 +2,19 @@ package Operator;
 
 import com.google.common.base.Objects;
 
-public class GraphNode 
+public class GraphNode //Sommet du graphe, identifié par un nom et un id
 	{
 	private String name;
 	private Integer id;
 
-	GraphNode(String name, Integer id) 
+	GraphNode(String name, Integer id) //Constructeur à partir des deux paramètres
 		{
 		this.name = name;
 		this.id = id;
 	    }
 
+//Getteurs
+	
 	  public String name() 
 	  	{
 	    return name;
@@ -22,7 +24,8 @@ public class GraphNode
 	  	{
 	    return id;
 	  	}
-	  
+
+//Permet de différencier deux GraphNode, utilisée par la classe MutableValueGraph	  
 	  @Override
 	  public boolean equals(Object other) 
 	  	{
@@ -34,12 +37,15 @@ public class GraphNode
 	    return false;
 	  	}
 
+//Utilisée par la classe MutableValueGraph	  
+
 	  @Override
 	  public int hashCode() 
 	  	{
 		return Objects.hashCode(name, id);
 	  	}
 
+//Renvoie le nom du GraphNode
 	  @Override
 	  public String toString() 
 	  	{
