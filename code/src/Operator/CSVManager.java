@@ -44,7 +44,7 @@ public class CSVManager {
 		
 		// Déclaration des variables
 		
-		String csvFile = "C:\\Users\\utilisateur\\Desktop\\Projet JAVA\\Projet_java/input_file.csv";
+		String csvFile = "C:\\Users\\Utilisateur\\Desktop\\Projet_Java\\git\\Projet_java/input_file.csv";
 		char cvsSplitBy = ';';
         BufferedReader r = null;        
         String annee = "";
@@ -226,7 +226,7 @@ public class CSVManager {
 		Vector<Boolean> ligneComp = new Vector<Boolean>();
 		Vector<Boolean> preLigneComp = new Vector<Boolean>();
 		Vector<String> compName = new Vector<String>();
-		long TimeConstraint = 0;
+		long TimeConstraint = vector.elementAt(1).get_date() - vector.elementAt(0).get_date();
 		//System.out.println(vector.size());
 		for(int i = 1; i < vector.size(); i++)
 		{
