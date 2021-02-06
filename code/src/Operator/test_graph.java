@@ -9,11 +9,12 @@ public class test_graph
 		{
 		Graph g = new Graph();
 		Vector<String> v=new Vector<String>();
-		v.add("FE_box_at_place;1µs;");
-		v.add("RE_box_at_place;5µs;");
-		v.add("FE_box_at_place;10µs;");
-		v.add("RE_box_at_place;50µs;");
+		v.add("A;1µs;");
+		v.add("B;5µs;");
+		v.add("C;10µs;");
+		v.add("D;50µs;");
 		g.split(v);
 		System.out.println(g.GraphToString());
+		System.out.println(g.get_equation(v));
 		}
 	}

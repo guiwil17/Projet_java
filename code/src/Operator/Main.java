@@ -12,6 +12,12 @@ public class Main {
         //System.out.println(t.get_box_conveyor());
         
         //System.out.println(res.size());
-        System.out.println(m.ListEvent(res).elementAt(2));
+        System.out.println(m.ListEvent(res).elementAt(800));
+        Graph g = new Graph();
+		Vector<String> v = m.ListEvent(res);
+		g.split(v);
+		System.out.println(g.GraphToString());
+		System.out.println(g.get_equation(v));
+
 	}
 }
