@@ -1,5 +1,4 @@
 package Operator;
-import java.util.Date;
 
 public class LigneTableau 
 	{
@@ -19,7 +18,7 @@ public class LigneTableau
 	private boolean c_limit;
 	private long date;
 
-	// Constructeur par défaut de l'objet LigneTableau, avec tous les paramètres à false et la date actuelle
+	// Constructeur par defaut de l'objet LigneTableau, avec tous les parametres a false et la date actuelle
 	LigneTableau(){
 		this.box_conveyor = false;
 		this.part_conveyor = false;
@@ -38,7 +37,7 @@ public class LigneTableau
 		this.date =0;
 	}
   
-	// Constructeur de l'objet LigneTableau, à partir des paramètres CSV sans les réels et entiers
+	// Constructeur de l'objet LigneTableau, a partir des parametres CSV sans les reels et entiers
 	LigneTableau(boolean box_conveyor, boolean part_conveyor, boolean grab, boolean c_plus, boolean auto, boolean manual, boolean emergency_stop, boolean reset_button, boolean start, boolean stop, boolean part_at_place, boolean box_at_place, boolean detected, boolean c_limit, long date)
 		{
 		this.box_conveyor = box_conveyor;
@@ -57,14 +56,14 @@ public class LigneTableau
 		this.c_limit = c_limit;
 		this.date = date;
 		}
-	// Met les paramètres sous forme de string
+	// Met les parametres sous forme de string
 	public String to_string()
 		{
 		String s = box_conveyor+" - "+part_conveyor+" - "+grab+" - "+c_plus+" - "+auto+" - "+manual+" - "+emergency_stop+" - "+reset_button+" - "+start+" - "+stop+" - "+part_at_place+" - "+box_at_place+" - "+detected+" - "+c_limit+" - "+date+"\n";
 		return s;
 		}
 
-	// Vérifie si l'objet est égal au 2e objet LigneTableau (mêmes conditions mais pas la même date) 
+	// Verifie si l'objet est egal au 2e objet LigneTableau (memes conditions mais pas la meme date) 
 	public boolean is_equal_to(LigneTableau l2)
 		{
 		boolean b = false;
@@ -75,7 +74,7 @@ public class LigneTableau
 		return b;
 		}
 	
-	// Setteurs des param?tres de chaque ligne du CSV	
+	// Setteurs des parametres de chaque ligne du CSV	
 
 	public void set_box_conveyor(boolean b)
 		{
@@ -152,7 +151,7 @@ public class LigneTableau
 		date = d;
 		}
 	
-// Getteurs des param?tres de chaque ligne du CSV
+// Getteurs des parametres de chaque ligne du CSV
 
 	
 	public boolean get_box_conveyor()

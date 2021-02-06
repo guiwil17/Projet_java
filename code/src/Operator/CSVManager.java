@@ -40,11 +40,11 @@ public class CSVManager {
 		  return false;
 	}
 
-	public Vector<LigneTableau> elimine_number() { 
+	public void elimine_number() { 
 		
-		// DÃ©claration des variables
+		// DÃƒÂ©claration des variables
 		
-		String csvFile = "C:\\Users\\Utilisateur\\Desktop\\Projet_Java\\git\\Projet_java\\input_file.csv";
+		String csvFile = "C:\\Users\\Arthur\\Desktop\\projet\\Projet_Java\\input_file.csv";
 		char cvsSplitBy = ';';
         BufferedReader r = null;        
         String annee = "";
@@ -67,7 +67,7 @@ public class CSVManager {
 				for(int colonne=0; colonne<ligne.length; colonne++) {
 					if(!existe(nbr,colonne)) {
 						switch(colonne) {
-						//On stock dans notre objet toutes les valeurs boolÃ©ennes
+						//On stock dans notre objet toutes les valeurs boolÃƒÂ©ennes
 							case 0 : 
 								L.set_box_conveyor(Boolean.parseBoolean(ligne[colonne]));
 								break;
@@ -112,14 +112,14 @@ public class CSVManager {
 								break;
 							case 21:	
 								
-								//On va ici dÃ©composer la String de la date pour pouvoir l'exploiter
+								//On va ici dÃƒÂ©composer la String de la date pour pouvoir l'exploiter
 								
 								annee = String.valueOf(ligne[colonne].charAt(19))+ String.valueOf(ligne[colonne].charAt(20)) + String.valueOf(ligne[colonne].charAt(21)) + String.valueOf(ligne[colonne].charAt(22));	
 								month = "0" + String.valueOf(ligne[colonne].charAt(25)) ;
 								day = String.valueOf(ligne[colonne].charAt(28)) + String.valueOf(ligne[colonne].charAt((29)));
 								h = String.valueOf(ligne[colonne].charAt(32)) + String.valueOf(ligne[colonne].charAt((33)));
 								min = String.valueOf(ligne[colonne].charAt(36)) + String.valueOf(ligne[colonne].charAt(37));								
-								//Permet de remettre Ã  0 la String
+								//Permet de remettre ÃƒÂ  0 la String
 								ms = "";
 								
 								s = String.valueOf(ligne[colonne].charAt(39)) + String.valueOf(ligne[colonne].charAt(40)) + String.valueOf(ligne[colonne].charAt(41));
@@ -128,7 +128,7 @@ public class CSVManager {
 								min = min.replaceAll(",", "");
 								
 								
-								//On crÃ©Ã© une nouvelle chaine de caratÃ¨re afin de rÃ©cupÃ©rer les millisecondes car la String ne fait pas tout le temps la mÃªme taille
+								//On crÃƒÂ©ÃƒÂ© une nouvelle chaine de caratÃƒÂ¨re afin de rÃƒÂ©cupÃƒÂ©rer les millisecondes car la String ne fait pas tout le temps la mÃƒÂªme taille
 								String ne = ligne[colonne].substring(19,ligne[colonne].indexOf(')'));
 								
 								if(String.valueOf(ligne[colonne].charAt(40)) == "," ) 
@@ -154,7 +154,7 @@ public class CSVManager {
 								ms = ms.replaceAll(" ", "");
 								
 								
-								//On convertit notre date afin de l'obtenir en milliseconde pour pouvoir ajouter les millisecondes récupéré precedemment
+								//On convertit notre date afin de l'obtenir en milliseconde pour pouvoir ajouter les millisecondes rÃ©cupÃ©rÃ© precedemment
 							
 									long seconds = Long.parseLong(s) * 1000000;
 									long minutes = Long.parseLong(min) * (60 * 1000000);
@@ -163,7 +163,7 @@ public class CSVManager {
 																
 									long time = Long.parseLong(ms) + seconds + minutes + hours + days;									
 									
-									// On vérifie que le temps précédent est inférieur au temps actuel 
+									// On vÃ©rifie que le temps prÃ©cÃ©dent est infÃ©rieur au temps actuel 
 									if (last_time != 0 && last_time > time) {
 										time += last_time - time + 00000000001;
 									}
@@ -171,7 +171,7 @@ public class CSVManager {
 
 									//System.out.println(time);	
 
-									//On ajoute la date Ã  notre Ligne
+									//On ajoute la date ÃƒÂ  notre Ligne
 									L.set_date(time);	
 								
 														        
@@ -188,12 +188,9 @@ public class CSVManager {
         catch(IOException e) {
         	e.printStackTrace();
         }
-        
-        return vector;
-
 	}
 
-	public void supprimer_doublons()
+	public void supprimer_doublons() //Supprime les doublons sauf la premiere et derniere occurence
 		{
 		Vector<LigneTableau> vector2 = new Vector<LigneTableau>();
 		int decallage=1;
@@ -220,7 +217,7 @@ public class CSVManager {
 		vector=vector2;
 		}
 	
-	public static Vector<String> ListEvent(Vector<LigneTableau> vector)
+	public Vector<String> ListEvent() //Renvoie un vector de string sous la forme suivante : evenement; contraite_temporelle µs;
 	{
 		Vector<String> str = new Vector<String>();
 		Vector<Boolean> ligneComp = new Vector<Boolean>();

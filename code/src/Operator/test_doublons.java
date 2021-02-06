@@ -3,7 +3,7 @@ package Operator;
 public class test_doublons {
 
 		public static void main(String args[])
-			{  //Test la suporession de doublons dans un vector d'entiers
+			{  //Test la suppression de doublons dans un vector d'entiers
 			CSVManager c = new CSVManager();
 			LigneTableau l1 = new LigneTableau();
 			LigneTableau l2 = new LigneTableau();
