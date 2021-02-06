@@ -42,7 +42,7 @@ public class CSVManager {
 
 	public Vector<LigneTableau> elimine_number() { 
 		
-		// Déclaration des variables
+		// DÃ©claration des variables
 		
 		String csvFile = "C:\\Users\\quent\\Documents\\Cours\\FIP\\Dev\\Java\\projet\\Projet_java\\Projet_java\\input_file.csv";
 		char cvsSplitBy = ';';
@@ -67,7 +67,7 @@ public class CSVManager {
 				for(int colonne=0; colonne<ligne.length; colonne++) {
 					if(!existe(nbr,colonne)) {
 						switch(colonne) {
-						//On stock dans notre objet toutes les valeurs booléennes
+						//On stock dans notre objet toutes les valeurs boolÃ©ennes
 							case 0 : 
 								L.set_box_conveyor(Boolean.parseBoolean(ligne[colonne]));
 								break;
@@ -112,14 +112,14 @@ public class CSVManager {
 								break;
 							case 21:	
 								
-								//On va ici décomposer la String de la date pour pouvoir l'exploiter
+								//On va ici dÃ©composer la String de la date pour pouvoir l'exploiter
 								
 								annee = String.valueOf(ligne[colonne].charAt(19))+ String.valueOf(ligne[colonne].charAt(20)) + String.valueOf(ligne[colonne].charAt(21)) + String.valueOf(ligne[colonne].charAt(22));	
 								month = "0" + String.valueOf(ligne[colonne].charAt(25)) ;
 								day = String.valueOf(ligne[colonne].charAt(28)) + String.valueOf(ligne[colonne].charAt((29)));
 								h = String.valueOf(ligne[colonne].charAt(32)) + String.valueOf(ligne[colonne].charAt((33)));
 								min = String.valueOf(ligne[colonne].charAt(36)) + String.valueOf(ligne[colonne].charAt(37));								
-								//Permet de remettre à 0 la String
+								//Permet de remettre Ã  0 la String
 								ms = "";
 								
 								s = String.valueOf(ligne[colonne].charAt(39)) + String.valueOf(ligne[colonne].charAt(40)) + String.valueOf(ligne[colonne].charAt(41));
@@ -128,7 +128,7 @@ public class CSVManager {
 								min = min.replaceAll(",", "");
 								
 								
-								//On créé une nouvelle chaine de caratère afin de récupérer les millisecondes car la String ne fait pas tout le temps la même taille
+								//On crÃ©Ã© une nouvelle chaine de caratÃ¨re afin de rÃ©cupÃ©rer les millisecondes car la String ne fait pas tout le temps la mÃªme taille
 								String ne = ligne[colonne].substring(19,ligne[colonne].indexOf(')'));
 								
 								if(String.valueOf(ligne[colonne].charAt(40)) == "," ) 
@@ -154,7 +154,7 @@ public class CSVManager {
 								ms = ms.replaceAll(" ", "");
 								
 								
-								//On convertit notre date afin de l'obtenir en milliseconde pour pouvoir ajouter les millisecondes r�cup�r� precedemment
+								//On convertit notre date afin de l'obtenir en milliseconde pour pouvoir ajouter les millisecondes récupéré precedemment
 							
 									long seconds = Long.parseLong(s) * 1000000;
 									long minutes = Long.parseLong(min) * (60 * 1000000);
@@ -163,7 +163,7 @@ public class CSVManager {
 																
 									long time = Long.parseLong(ms) + seconds + minutes + hours + days;									
 									
-									// On v�rifie que le temps pr�c�dent est inf�rieur au temps actuel 
+									// On vérifie que le temps précédent est inférieur au temps actuel 
 									if (last_time != 0 && last_time > time) {
 										time += last_time - time + 00000000001;
 									}
@@ -171,7 +171,7 @@ public class CSVManager {
 
 									//System.out.println(time);	
 
-									//On ajoute la date à notre Ligne
+									//On ajoute la date Ã  notre Ligne
 									L.set_date(time);	
 								
 														        
@@ -226,7 +226,7 @@ public class CSVManager {
 		Vector<Boolean> ligneComp = new Vector<Boolean>();
 		Vector<Boolean> preLigneComp = new Vector<Boolean>();
 		Vector<String> compName = new Vector<String>();
-		long TimeConstraint = 0;
+		long TimeConstraint = vector.elementAt(1).get_date() - vector.elementAt(0).get_date();
 		//System.out.println(vector.size());
 		for(int i = 1; i < vector.size(); i++)
 		{
@@ -316,7 +316,7 @@ public class CSVManager {
 						event+=compName.elementAt(j);
 						event+=";";
 						event+=TimeConstraint;
-						event+="�s;";
+						event+="µs;";
 						str.add(event);
 					}
 				}

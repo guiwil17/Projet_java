@@ -18,5 +18,6 @@ public class Main {
 		g.split(v);
 		System.out.println(g.GraphToString());
 		System.out.println(g.get_equation(v));
+
 	}
 }
