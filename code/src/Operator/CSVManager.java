@@ -44,7 +44,7 @@ public class CSVManager {
 		
 		// DÃ©claration des variables
 		
-		String csvFile = "C:\\Users\\quent\\Documents\\Cours\\FIP\\Dev\\Java\\projet\\Projet_java\\Projet_java\\input_file.csv";
+		String csvFile = "C:\\Users\\Utilisateur\\Desktop\\Projet_Java\\git\\Projet_java\\input_file.csv";
 		char cvsSplitBy = ';';
         BufferedReader r = null;        
         String annee = "";
@@ -233,13 +233,9 @@ public class CSVManager {
 			
 			LigneTableau ligne = vector.elementAt(i); //obj[i];
 			LigneTableau preLigne = vector.elementAt(i-1); //obj[i-1];
-			if(ligne.is_equal_to(preLigne)) //ligne.Comp1 == preLigne.Comp1 && ligne.Comp2 == preLigne.Comp2
+			if(!ligne.is_equal_to(preLigne))
 			{
 				TimeConstraint = (long)ligne.get_date() - (long)preLigne.get_date();
-				//TimeConstraint = ligne.get_date().compareTo(preLigne.get_date());
-			}
-			else
-			{
 				ligneComp.clear();
 				preLigneComp.clear();
 				compName.clear();
