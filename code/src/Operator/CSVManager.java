@@ -7,6 +7,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,7 +16,11 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-
+import java.util.InputMismatchException;
+import java.util.Scanner;
+import static java.nio.file.StandardOpenOption.APPEND;
+import java.io.*;
+import java.util.*;
 
 public class CSVManager {
 	
@@ -44,7 +49,15 @@ public class CSVManager {
 		
 		// DÃƒÆ’Ã‚Â©claration des variables
 		
-		String csvFile = "C:\\Users\\Arthur\\Desktop\\projet\\Projet_Java\\input_file.csv";
+		String csvFile = ".././input_file.csv";	
+		
+		// Permet de créer et de remplir le nouveau csv
+		String SEPARATOR = "%n";
+		String HEADER = "Box_conveyor;Part_conveyor;Grab;C_plus;Auto;Manual;Emergency_stop;Reset_button;Start;Stop;Part_at_place;Box_at_place;Detected;C_limit;Temps_occurrence" + SEPARATOR;
+		String DELIMITER = ";";
+		String ajout = "";
+		FileWriter file = null;
+		
 		char cvsSplitBy = ';';
         BufferedReader r = null;        
         String annee = "";
@@ -58,6 +71,28 @@ public class CSVManager {
         int debut_s = 43;
         LigneTableau L = new LigneTableau();
 
+      
+        try {
+        	  // Crée un nouveau fichier à la racine du projet qui se nomme result
+        	  file = new FileWriter(".././result.csv");        	
+        }
+        catch(Exception e)
+	      {
+	        e.printStackTrace();
+	      }	
+        
+        // Récupère le chemin du nouveau csv
+        Path orderPath = Paths.get(".././result.csv");
+        try {      	 
+      	  // Ajoute l'entête du CSV
+      	  Files.write(orderPath, String.format(HEADER).getBytes(), APPEND);
+      }
+      catch(Exception e)
+	      {
+	        e.printStackTrace();
+	      }	
+       
+       
         try {
         	
         	String[][] tableau1 = readCSV(csvFile, cvsSplitBy, StandardCharsets.UTF_8);
@@ -180,7 +215,49 @@ public class CSVManager {
 				}
 				
 				//On ajoute notre ligne au vecteur
-				vector.addElement(L);				
+				vector.addElement(L);
+				
+				try
+			      {
+					  // Ajoute une nouvelle ligne au csv
+			        ajout = "";
+			        ajout +=String.valueOf(L.get_box_conveyor());
+			        ajout += DELIMITER;
+			        ajout += String.valueOf(L.get_part_conveyor());
+			        ajout += DELIMITER;
+			        ajout += String.valueOf(L.get_grab());
+			        ajout += DELIMITER;
+			        ajout += String.valueOf(L.get_c_plus());
+			        ajout += DELIMITER;
+			        ajout += String.valueOf(L.get_auto());
+			        ajout += DELIMITER;
+			        ajout += String.valueOf(L.get_manual());
+			        ajout += DELIMITER;
+			        ajout += String.valueOf(L.get_emergency_stop());
+			        ajout += DELIMITER;
+			        ajout += String.valueOf(L.get_reset_button());
+			        ajout +=  DELIMITER;
+			        ajout += String.valueOf(L.get_start());
+			        ajout += DELIMITER;
+			        ajout += String.valueOf(L.get_stop());
+			        ajout += DELIMITER;
+			        ajout += String.valueOf(L.get_part_at_place());
+			        ajout += DELIMITER;
+			        ajout += String.valueOf( L.get_box_at_place());
+			        ajout += DELIMITER;
+			        ajout += String.valueOf(L.get_detected());
+			        ajout += DELIMITER;
+			        ajout += String.valueOf(L.get_c_limit());
+			        ajout += DELIMITER;
+			        ajout += String.valueOf(L.get_date());
+			        ajout += SEPARATOR;			             
+			        Files.write(orderPath, String.format(ajout).getBytes(), APPEND);
+			       
+			      }
+			      catch(Exception e)
+			      {
+			        e.printStackTrace();
+			      }			    
 			}
         	
         	
