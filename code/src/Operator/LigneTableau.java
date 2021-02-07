@@ -56,13 +56,6 @@ public class LigneTableau
 		this.c_limit = c_limit;
 		this.date = date;
 		}
-	// Met les parametres sous forme de string
-	public String to_string()
-		{
-		String s = box_conveyor+" - "+part_conveyor+" - "+grab+" - "+c_plus+" - "+auto+" - "+manual+" - "+emergency_stop+" - "+reset_button+" - "+start+" - "+stop+" - "+part_at_place+" - "+box_at_place+" - "+detected+" - "+c_limit+" - "+date+"\n";
-		return s;
-		}
-
 	// Verifie si l'objet est egal au 2e objet LigneTableau (memes conditions mais pas la meme date) 
 	public boolean is_equal_to(LigneTableau l2)
 		{
