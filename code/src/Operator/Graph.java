@@ -29,19 +29,33 @@ public class Graph
 			}
 		}
 
-	public String get_equation(Vector<String> v) //Retourne un string qui modelise l'equation
+	@SuppressWarnings("null")
+	public Vector<String> get_equation(Vector<String> v) //Retourne un string qui modelise l'equation
 		{
 		String equation = "";
 		String[] element0 = v.elementAt(0).split(";"); //On recupere le premier element du vector
 		equation+="(In, "+element0[0]+", nct) ";	//Il n'a pas de contrainte temporelle avant lui
-		
+		Vector <String> membre = new Vector<String>();
+		Vector <String> tab_equation = new Vector<String>();
+		String elm = v.elementAt(0).split(";").toString();
+		membre.add(elm);
 		for(int i=0; i<v.size()-1; i++) //On parcours tous les elements sauf le dernier
 			{
+			
 			String[] element = v.elementAt(i).split(";");
 			String[] element2 = v.elementAt(i+1).split(";");
-			equation+="*\n("+element[0]+", "+element2[0]+", "+element[1]+") "; //On ajoute le string qui contient le predecesseur, l'element cible, et la contrainte temporelle qui lie les deux 
+			membre.add(element[0]);
+			if(membre.indexOf(element2[0]) == -1) {
+				equation+="*\n("+element[0]+", "+element2[0]+", "+element[1]+") ";
 			}
-		return equation;
+			else {
+				tab_equation.add(equation);
+				equation = "(In, "+element[0]+", nct) ";	
+				membre.clear();
+			}			
+			 //On ajoute le string qui contient le predecesseur, l'element cible, et la contrainte temporelle qui lie les deux 
+			}
+		return tab_equation;
 		}
 	
 	public String GraphToString() //Retourne un string qui modelise un graphe sous la forme <(sommet1) -> (sommet2)>=valeur de l'arc
