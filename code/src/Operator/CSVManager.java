@@ -8,19 +8,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 import static java.nio.file.StandardOpenOption.APPEND;
 import java.io.*;
-import java.util.*;
+
 
 public class CSVManager {
 	
@@ -47,11 +37,11 @@ public class CSVManager {
 
 	public void elimine_number() { 
 		
-		// DÃƒÂ©claration des variables
+		// Declaration des variables
 		
-		String csvFile = ".././input_file.csv";	
+		String csvFile = "C:\\Users\\Arthur\\Desktop\\projet\\Projet_java\\input_file.csv";	
 		
-		// Permet de cr�er et de remplir le nouveau csv
+		// Permet de creer et de remplir le nouveau csv
 		String SEPARATOR = "%n";
 		String HEADER = "Box_conveyor;Part_conveyor;Grab;C_plus;Auto;Manual;Emergency_stop;Reset_button;Start;Stop;Part_at_place;Box_at_place;Detected;C_limit;Temps_occurrence" + SEPARATOR;
 		String DELIMITER = ";";
@@ -73,7 +63,7 @@ public class CSVManager {
 
       
         try {
-        	  // Cr�e un nouveau fichier � la racine du projet qui se nomme result
+        	  // Cree un nouveau fichier a la racine du projet qui se nomme result
         	  file = new FileWriter(".././result.csv");        	
         }
         catch(Exception e)
@@ -81,10 +71,10 @@ public class CSVManager {
 	        e.printStackTrace();
 	      }	
         
-        // R�cup�re le chemin du nouveau csv
+        // Recupere le chemin du nouveau csv
         Path orderPath = Paths.get(".././result.csv");
         try {      	 
-      	  // Ajoute l'ent�te du CSV
+      	  // Ajoute l'entete du CSV
       	  Files.write(orderPath, String.format(HEADER).getBytes(), APPEND);
       }
       catch(Exception e)
@@ -189,7 +179,7 @@ public class CSVManager {
 								ms = ms.replaceAll(" ", "");
 								
 								
-								//On convertit notre date afin de l'obtenir en milliseconde pour pouvoir ajouter les millisecondes rÃ©cupÃ©rÃ© precedemment
+								//On convertit notre date afin de l'obtenir en milliseconde pour pouvoir ajouter les millisecondes recupere precedemment
 							
 									long seconds = Long.parseLong(s) * 1000000;
 									long minutes = Long.parseLong(min) * (60 * 1000000);
@@ -198,7 +188,7 @@ public class CSVManager {
 																
 									long time = Long.parseLong(ms) + seconds + minutes + hours + days;									
 									
-									// On vÃ©rifie que le temps prÃ©cÃ©dent est infÃ©rieur au temps actuel 
+									// On verifie que le temps precedent est inferieur au temps actuel 
 									if (last_time != 0 && last_time > time) {
 										time += last_time - time + 00000000001;
 									}
@@ -206,7 +196,7 @@ public class CSVManager {
 
 									//System.out.println(time);	
 
-									//On ajoute la date ÃƒÂ  notre Ligne
+									//On ajoute la date a notre Ligne
 									L.set_date(time);	
 								
 														        

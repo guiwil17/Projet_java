@@ -11,25 +11,30 @@ public class Graph
 		graphe = ValueGraphBuilder.directed().build(); //On construit graphe sous la forme d'un graphe oriente
 		}
 	
-	public void split(Vector<String> v) //Peuplement du graphe
+	public void split(Vector<Vector<String>> v) //Peuplement du graphe
 		{
-		int taille = v.size()-1; //-1 pour ne pas prendre le dernier element
-		for(int i=0; i<taille; i++) //On parcours tous les elements sauf le dernier
+		int taille = v.size()-1; //On ne parcours pas le dernier élément (out of bound)
+		for(int i=0; i<taille; i++) //On parcours le vecteur de "lignes" de l'excel
 			{
-			//element[0] contient le nom du sommet, element[1] contient la contraite temporelle, meme chose pour element2
-			String[] element = v.elementAt(i).split(";"); 
-			String[] element2 = v.elementAt(i+1).split(";");
-			
-			//On cree un sommet de graphe avec sa valeur et un id pour chaque element
-			GraphNode a = new GraphNode(element[0], i); 
-			GraphNode b = new GraphNode(element2[0], i+1);
-			
-			//On ajoute les sommets au graphe et la contrainte temporelle entre les deux, qui sera la valeur de l'arc
-			graphe.putEdgeValue(a, b, element[1]);
+			Vector<String> colonne_actuelle = v.elementAt(i); 
+			Vector<String> colonne_suivante = v.elementAt(i+1);
+			Vector<GraphNode> v_graph_suivant = new Vector<GraphNode>(); //Permet de stocker en memoire les noeuds du graphe pour la colonne suivante
+			for(int j=0; j<colonne_suivante.size(); j++) //On peuple le vecteur v_graph_suivant
+				{
+				GraphNode noeud = new GraphNode(colonne_suivante.elementAt(j).split(";")[0], i*1000+j);
+				v_graph_suivant.add(noeud);
+				}
+			for(int j=0; j<colonne_actuelle.size(); j++) //Pour chaque valeur de la colonne actuelle, on cree un noeud et on ajoute une liaison avec tous les noeuds de la colonne suivante
+				{
+				GraphNode a = new GraphNode(colonne_actuelle.elementAt(j).split(";")[0], i*1000+j);
+				for(int k=0; k<v_graph_suivant.size(); k++)
+					{
+					graphe.putEdgeValue(a, v_graph_suivant.elementAt(k), colonne_actuelle.elementAt(j).split(";")[1]);
+					}
+				}
 			}
 		}
 
-	@SuppressWarnings("null")
 	public Vector<String> get_equation(Vector<String> v) //Retourne un string qui modelise l'equation
 		{
 		String equation = "";
