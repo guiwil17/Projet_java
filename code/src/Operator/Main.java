@@ -12,9 +12,9 @@ public class Main {
        
             
         Graph g = new Graph();
-		Vector<String> v = m.ListEvent();
-		
-		
+		Vector<Vector<String>> v = m.ListEvent();
+		System.out.println(v.elementAt(0).elementAt(0));
+		/*
 		g.split(v);
 		System.out.println("--------------- Affichage du graphe --------------\n");
 		System.out.println(g.GraphToString());
@@ -27,6 +27,6 @@ public class Main {
 			System.out.print ( itr.next ());
 			compteur ++;
 			}
-		System.out.println();
+		System.out.println();*/
 	}
 }

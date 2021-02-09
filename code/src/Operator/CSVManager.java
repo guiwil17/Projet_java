@@ -294,9 +294,9 @@ public class CSVManager {
 		vector=vector2;
 		}
 	
-	public Vector<String> ListEvent() //Renvoie un vector de string sous la forme suivante : evenement; contraite_temporelle µs;
+	public Vector<Vector<String>> ListEvent() //Renvoie un vector de string sous la forme suivante : evenement; contraite_temporelle µs;
 	{
-		Vector<String> str = new Vector<String>();
+		Vector<Vector<String>> str = new Vector<Vector<String>>();
 		Vector<Boolean> ligneComp = new Vector<Boolean>();
 		Vector<Boolean> preLigneComp = new Vector<Boolean>();
 		Vector<String> compName = new Vector<String>();
@@ -370,6 +370,7 @@ public class CSVManager {
 				preLigneComp.add(preLigne.get_c_limit());
 				compName.add("c_limit");
 				//System.out.println(ligneComp.size());
+				Vector<String> ligneEvent = new Vector<String>();
 				for(int j = 0; j < ligneComp.size(); j++)
 				{
 					if(ligneComp.elementAt(j) != preLigneComp.elementAt(j))
@@ -377,20 +378,20 @@ public class CSVManager {
 						String event = new String();
 						if(preLigneComp.elementAt(j) == true)
 						{
-							event+="FE_";
+							event = "FE_";
 						}
 						else
 						{
-							event+="RE_";
+							event ="RE_";
 						}
 						event+=compName.elementAt(j);
 						event+=";";
 						event+=TimeConstraint;
 						event+="µs;";
-						str.add(event);
+						ligneEvent.add(event);
 					}
 				}
-				
+				str.add(ligneEvent);
 			}
 		}
 		return str;
