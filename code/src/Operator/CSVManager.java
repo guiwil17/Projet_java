@@ -39,7 +39,7 @@ public class CSVManager {
 		
 		// Declaration des variables
 		
-		String csvFile = "C:\\Users\\Arthur\\Desktop\\projet\\Projet_java\\input_file.csv";	
+		String csvFile = ".././input_file.csv";	
 		
 		// Permet de creer et de remplir le nouveau csv
 		String SEPARATOR = "%n";
@@ -49,7 +49,6 @@ public class CSVManager {
 		FileWriter file = null;
 		
 		char cvsSplitBy = ';';
-        BufferedReader r = null;        
         String annee = "";
         String day = "";
         String month = "";
@@ -175,18 +174,20 @@ public class CSVManager {
 																
 								min = min.replaceAll(",", "");
 								
-								String MyDate = annee + "/" + month + "/" + day + " " + h + ":" + min + ":" + s;
 								ms = ms.replaceAll(" ", "");
 								
 								
 								//On convertit notre date afin de l'obtenir en milliseconde pour pouvoir ajouter les millisecondes recupere precedemment
-							
+									
+								
 									long seconds = Long.parseLong(s) * 1000000;
 									long minutes = Long.parseLong(min) * (60 * 1000000);
 									long hours = Long.parseLong(h)* 60 *60 * 1000000;
 									long days = Long.parseLong(day) * (24 * 60 * 60 * 1000000);
+									long months = Long.parseLong(month) * (2629800000L);
+									long years = Long.parseLong(annee) * (31557600000L);
 																
-									long time = Long.parseLong(ms) + seconds + minutes + hours + days;									
+									long time = Long.parseLong(ms) + seconds + minutes + hours + days + months + years;									
 									
 									// On verifie que le temps precedent est inferieur au temps actuel 
 									if (last_time != 0 && last_time > time) {
