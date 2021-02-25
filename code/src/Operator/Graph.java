@@ -70,7 +70,7 @@ public class Graph
 					String[] element2 = v.elementAt(j+1).elementAt(i).split(";");
 			
 					
-					//On verifie si m'element existe deja dans le vecteur, si c'est le cas on reinitialise l'equation et on ajoute celle qu'on a cree dans le vecteur de stockage des equations
+					//On verifie si l'element existe deja dans le vecteur, si c'est le cas on reinitialise l'equation et on ajoute celle qu'on a cree dans le vecteur de stockage des equations
 					if(membre.indexOf(element2[0]) != -1) {
 						tab_equation.add(equation);
 						equation = "(In, "+element[0]+", nct) ";	

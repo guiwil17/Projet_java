@@ -1,7 +1,6 @@
 package Operator;
 
 import java.util.Vector;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -136,14 +135,14 @@ public class CSVManager {
 								break;
 							case 21:	
 								
-								//On va ici dÃƒÂ©composer la String de la date pour pouvoir l'exploiter
+								//On va ici decomposer la String de la date pour pouvoir l'exploiter
 								
 								annee = String.valueOf(ligne[colonne].charAt(19))+ String.valueOf(ligne[colonne].charAt(20)) + String.valueOf(ligne[colonne].charAt(21)) + String.valueOf(ligne[colonne].charAt(22));	
 								month = "0" + String.valueOf(ligne[colonne].charAt(25)) ;
 								day = String.valueOf(ligne[colonne].charAt(28)) + String.valueOf(ligne[colonne].charAt((29)));
 								h = String.valueOf(ligne[colonne].charAt(32)) + String.valueOf(ligne[colonne].charAt((33)));
 								min = String.valueOf(ligne[colonne].charAt(36)) + String.valueOf(ligne[colonne].charAt(37));								
-								//Permet de remettre ÃƒÂ  0 la String
+								//Permet de remettre a 0 la String
 								ms = "";
 								
 								s = String.valueOf(ligne[colonne].charAt(39)) + String.valueOf(ligne[colonne].charAt(40)) + String.valueOf(ligne[colonne].charAt(41));
@@ -152,7 +151,7 @@ public class CSVManager {
 								min = min.replaceAll(",", "");
 								
 								
-								//On crÃƒÂ©ÃƒÂ© une nouvelle chaine de caratÃƒÂ¨re afin de rÃƒÂ©cupÃƒÂ©rer les millisecondes car la String ne fait pas tout le temps la mÃƒÂªme taille
+								//On cree une nouvelle chaine de caractere afin de recuperer les millisecondes car la String ne fait pas tout le temps la meme taille
 								String ne = ligne[colonne].substring(19,ligne[colonne].indexOf(')'));
 								
 								if(String.valueOf(ligne[colonne].charAt(40)) == "," ) 
@@ -195,7 +194,6 @@ public class CSVManager {
 									}
 									last_time = time;
 
-									//System.out.println(time);	
 
 									//On ajoute la date a notre Ligne
 									L.set_date(time);	
