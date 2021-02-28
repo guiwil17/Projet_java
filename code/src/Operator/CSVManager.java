@@ -90,7 +90,7 @@ public class CSVManager {
 				for(int colonne=0; colonne<ligne.length; colonne++) {
 					if(!existe(nbr,colonne)) {
 						switch(colonne) {
-						//On stock dans notre objet toutes les valeurs boolÃƒÂ©ennes
+						//On stock dans notre objet toutes les valeurs booleennes
 							case 0 : 
 								L.set_box_conveyor(Boolean.parseBoolean(ligne[colonne]));
 								break;
