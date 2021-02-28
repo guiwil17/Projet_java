@@ -13,7 +13,7 @@ public class Graph
 	
 	public void split(Vector<Vector<String>> v) //Peuplement du graphe
 		{
-		int taille = v.size()-1; //On ne parcours pas le dernier √©l√©ment (out of bound)
+		int taille = v.size()-1; //On ne parcours pas le dernier √É¬©l√É¬©ment (out of bound)
 		for(int i=0; i<taille; i++) //On parcours le vecteur de "lignes" de l'excel
 			{
 			Vector<String> colonne_actuelle = v.elementAt(i); 
@@ -38,20 +38,20 @@ public class Graph
 	public Vector<String> get_equation(Vector<Vector<String>> v) //Retourne un Vector de string qui modelise les equations, chaque String du vector est une equation 
 		{
 		String equation = "";
-		Vector <String> membre = new Vector<String>(); // Vector qui permet de savoir les evenements qui se sont dÈj‡ passsÈ dans l'equation afin d'Èviter les repetitions
-		Vector <String> tab_equation = new Vector<String>(); //Vector qui permet de stocker les equations po
+		Vector <String> membre = new Vector<String>(); // Vector qui permet de savoir les evenements qui se sont d√©j√† passs√© dans l'equation afin d'√©viter les repetitions
+		Vector <String> tab_equation = new Vector<String>(); //Vector qui permet de stocker les equations 
 		
 		
 		// Initialisation de l'equation 
 		int compteur = 0;
-		for(int i=0; i < v.elementAt(0).size()-1;i++)//On recupere le premier vector de String qui correspond ‡ l'Ètat initial du systËme
+		for(int i=0; i < v.elementAt(0).size()-1;i++)//On recupere le premier vector de String qui correspond √† l'√©tat initial du syst√®me
 		{
 			String[] element0 = v.elementAt(0).elementAt(i).split(";"); 
 			equation+="(In, "+element0[0]+", nct) * ";	//Il n'a pas de contrainte temporelle avant lui
 			String elm = v.elementAt(0).elementAt(i).split(";").toString();
 			compteur ++;
 		}
-		String[] element0 = v.elementAt(0).elementAt(compteur).split(";"); //On recupere le dernier element du vector sans lui mettre le symbole * ‡ la fin pour faire correspondre l'affichage dans la console 
+		String[] element0 = v.elementAt(0).elementAt(compteur).split(";"); //On recupere le dernier element du vector sans lui mettre le symbole * √† la fin pour faire correspondre l'affichage dans la console 
 		equation+="(In, "+element0[0]+", nct) ";
 		
 		for (int j=0; j < v.size()-1; j++ ) {	//On parcourt le premier vector qui contient les differents vector de string
@@ -78,7 +78,7 @@ public class Graph
 						membre.add(element[0]);
 						equation+="*\n("+element[0]+", "+element2[0]+", "+element[1]+") ";
 					}
-					// Si il existe pas, on ajoute une nouvelle condition ‡ l'equation
+					// Si il existe pas, on ajoute une nouvelle condition √† l'equation
 					else {
 						equation+="*\n("+element[0]+", "+element2[0]+", "+element[1]+") "; //On ajoute le string qui contient le predecesseur, l'element cible, et la contrainte temporelle qui lie les deux 
 					}
