@@ -258,14 +258,15 @@ public class CSVManager {
 
 	public void supprimer_doublons() //Supprime les doublons sauf la premiere et derniere occurence
 		{
-		Vector<LigneTableau> vector2 = new Vector<LigneTableau>();
+		Vector<LigneTableau> vector2 = new Vector<LigneTableau>(); //Vecteur temporaire pour stocker les LignesTableaux sans doublons
 		int decallage=1;
-		for(int indice=0; indice<vector.size(); indice+=decallage)
+		for(int indice=0; indice<vector.size(); indice+=decallage) //On parcours le vecteur
 			{
-			LigneTableau debut = vector.get(indice);
-				int offset=1;
-				LigneTableau fin = new LigneTableau();
-				boolean doublons=false;
+			LigneTableau debut = vector.get(indice); //debut contient la LigneTableau que l'on est en train de regarder
+			int offset=1;
+			LigneTableau fin = new LigneTableau();
+			boolean doublons=false;
+			//Tant qu'on a un doublon et qu'on ne dépasse pas la taille du tableau on incrémente offset et on met le dernier élément en cours dans fin
 			while((indice+offset)<vector.size()&&vector.elementAt(indice).is_equal_to(vector.elementAt(indice+offset)))
 				{
 				doublons=true;
@@ -273,14 +274,13 @@ public class CSVManager {
 				offset+=1;
 				decallage=offset;
 				}
-			
-			vector2.add(debut);
+			vector2.add(debut); //On met début dans le vecteur, et si il y a des doublons, on met aussi fin, sinon pas besoin car on a rien supprimé
 			if(doublons)
 				{
 				vector2.add(fin);	
 				}
 			}
-		vector=vector2;
+		vector=vector2; //vector prend la valeur du vecteur temporaire vector2
 		}
 	
 	public Vector<Vector<String>> ListEvent() //Renvoie un vector de string sous la forme suivante : evenement; contraite_temporelle µs;
